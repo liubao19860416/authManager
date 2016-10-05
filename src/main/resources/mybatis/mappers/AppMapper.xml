@@ -32,6 +32,17 @@
     from ss_app
     where app_key = #{appKey,jdbcType=VARCHAR}
   </select>
+  
+  <!-- 使用@Patam参数替换后的sql查询,Available parameters are [appKeyParam, appSecretParam, param1, param2] -->
+  <select id="selectAppIdByAppParam" resultType="java.lang.Long" >
+    select id
+    from ss_app
+    where 
+     app_secret = #{appSecretParam,jdbcType=VARCHAR}
+   	and app_key = #{appKeyParam,jdbcType=VARCHAR}
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from ss_app
     where id = #{id,jdbcType=BIGINT}

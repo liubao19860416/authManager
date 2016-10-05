@@ -2,6 +2,8 @@ package com.platform.shiro.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.platform.shiro.entity.App;
 import com.platform.utils.Page;
 
@@ -30,5 +32,10 @@ public interface AppMapper {
     
     List<App> selectPage(Page<App> p);
     
-    Long selectAppIdByAppKey(String appKey);
+    Long selectAppIdByAppKey( String appKey);
+    
+    /**
+     * Available parameters are [appKeyParam, appSecretParam, param1, param2]
+     */
+    Long selectAppIdByAppParam(@Param("appKeyParam") String appKey,@Param("appSecretParam") String appSecret);
 }
