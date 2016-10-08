@@ -21,6 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController {
 
+    @RequestMapping(value = "/test/pdf")
+    public String showPdfUI(HttpServletRequest req, Model model){
+    	return "pdf";
+    }
+    
     @RequestMapping(value = "/mall/login")
     public String showMallLoginForm(HttpServletRequest req, Model model){
     	return doLogin(req,model ,"mall/login");
