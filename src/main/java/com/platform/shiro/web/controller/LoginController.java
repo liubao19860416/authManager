@@ -1,14 +1,21 @@
 package com.platform.shiro.web.controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 
@@ -24,6 +31,28 @@ public class LoginController {
     @RequestMapping(value = "/test/pdf")
     public String showPdfUI(HttpServletRequest req, Model model){
     	return "pdf";
+    }
+    
+    @RequestMapping(value = "/test/getPdfStream")
+    public void getPdfStream(HttpServletRequest request,HttpServletResponse response, Model model){
+    	String file="D:\\temp\\test.pdf";
+		InputStream in = null;
+		try {
+			in = new FileInputStream(file);
+			ServletOutputStream out = response.getOutputStream();
+			StreamUtils.copy(in, out);
+		} catch ( IOException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(in!=null){
+					in.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+    	
     }
     
     @RequestMapping(value = "/mall/login")

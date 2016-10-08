@@ -12,7 +12,8 @@
  
  window.onload = function (){
 	    //var success = new PDFObject({ url: "${ctx}/static/test.pdf" }).embed("pdfDivId");
-	    var success = new PDFObject({ url: "${ctxStatic}/test.pdf" }).embed("pdfDivId");
+	    //var success = new PDFObject({ url: "${ctxStatic}/test.pdf" }).embed("pdfDivId");
+	    var success = new PDFObject({ url: "${ctx}/test/getPdfStream" }).embed("pdfDivId");
 	    console.log("加载pdf结果:"+success);
 	};
  </script>
