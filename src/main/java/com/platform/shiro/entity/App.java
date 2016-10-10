@@ -2,6 +2,10 @@ package com.platform.shiro.entity;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+
 /**
  * 
 * @ClassName: App 
@@ -10,8 +14,10 @@ import java.io.Serializable;
 * @date 2015年3月20日 下午1:58:16 
 *
  */
+@JsonIgnoreProperties(value={"class"},ignoreUnknown=true)
 public class App implements Serializable {
-    private Long id;
+	private static final long serialVersionUID = 9080988719694926058L;
+	private Long id;
     private String name;
     private String appKey;
     private String appSecret;

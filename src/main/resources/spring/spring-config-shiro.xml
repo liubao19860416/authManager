@@ -14,7 +14,7 @@
     </bean> -->
     
     <bean id="myShiroCacheManager" class="com.platform.my.MyShiroCacheManager">
-        <property name="cacheManager" ref="redisCacheManager"/>
+        <property name="cacheManager" ref="cacheManager"/>
     </bean>
 
     <!-- 凭证匹配器 -->

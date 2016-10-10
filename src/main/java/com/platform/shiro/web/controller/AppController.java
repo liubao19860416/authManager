@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -35,15 +36,31 @@ public class AppController {
     @Autowired
     private AppService appService;
 
+	@RequiresPermissions("app:view")
+    @RequestMapping("test")
+    public String listTest(Model model,HttpServletRequest request,Map<String, Object> map) {
+    	Long appId=1L;
+    	//查找,添加缓存
+		App findOne = appService.findOne(appId);
+		
+		//更新,失效缓存
+		//App updateApp = appService.updateApp(findOne);
+		
+		List<App> appList= new ArrayList<>();	    	
+		appList.add(findOne);
+        model.addAttribute("appList", appList);
+        return "app/list";
+    }
+    
     @RequiresPermissions("app:view")
     @RequestMapping()
     public String list(Model model,HttpServletRequest request,Map<String, Object> map) {
     	@SuppressWarnings("unchecked")
-		Page<App> p = PageUtil.buidPagebean(request, map);
-		List<App> appList= appService.findPage(p);	    	
-        model.addAttribute("appList", appList);
-        PageUtil.buildGrid(p);
-        return "app/list";
+    	Page<App> p = PageUtil.buidPagebean(request, map);
+    	List<App> appList= appService.findPage(p);	    	
+    	model.addAttribute("appList", appList);
+    	PageUtil.buildGrid(p);
+    	return "app/list";
     }
 
     @RequiresPermissions("app:create")
